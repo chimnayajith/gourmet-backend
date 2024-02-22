@@ -1,0 +1,19 @@
+{
+  "name": "gourmet-backend",
+  "version": "1.0.0",
+  "description": "Backend for e-commerce website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chimnayajith/gourmet-backend.git"
+  },
+  "author": "Chinmay Ajith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chimnayajith/gourmet-backend/issues"
+  },
+  "homepage": "https://github.com/chimnayajith/gourmet-backend#readme"
+}
