@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyToken = require("../middleware/auth");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productsModel");
-
+const countShops = require("../utils/cart/countShops");
 router.get("/", verifyToken, async (req, res) => {
   try {
     const userId = req.currentUser.userId;
@@ -43,8 +43,17 @@ router.post("/add", verifyToken, async (req, res) => {
       count: count,
     };
 
+    let cart = await Cart.findOne({ userId });
+    if (cart) {
+      const newItems = temp.items.push(addedItem);
+      const shopCount = await countShops(newItems);
+      if (shopCount > 3) {
+        throw Error("MAX_SHOP_LIMIT");
+      }
+    }
+
     // finds and adds to the cart of the user. if cart doest exist, creates one.
-    const cart = await Cart.findOneAndUpdate(
+    cart = await Cart.findOneAndUpdate(
       {
         userId: userId,
       },
@@ -129,4 +138,6 @@ router.delete("/remove", verifyToken, async (req, res) => {
     res.status(400).json(error.message);
   }
 });
+
+
 module.exports = router;
