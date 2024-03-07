@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const orderSchema = new mongoose.Schema({
   userId: { type: Schema.Types.ObjectId, ref: "Users" },
+  shopId: { type: Schema.Types.ObjectId, ref: "Users" },
   orderDate: { type: Schema.Types.Date, required: true },
   items: [
     {
@@ -15,7 +16,7 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: [
-      "pending", 
+      "pending",
       "processing",
       "shipped",
       "delivered",
@@ -27,7 +28,6 @@ const orderSchema = new mongoose.Schema({
   shippingAddress: { type: String, required: true },
   notes: { types: String },
   cancellationReason: { type: String },
-  refundAmount: { type: Number },
   refundDate: { type: Date },
 });
 
